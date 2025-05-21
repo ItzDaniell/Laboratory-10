@@ -2,8 +2,8 @@ function SerieComponent(props) {
     return (
         <div className="card">
             <img 
-                className="card-img-top" 
-                src={"https://dummyimage.com/400x250/000/fff&text="+props.imagen} 
+                className="card-img-top h-75" 
+                src={props.imagen} 
                 alt="img" />
             <div className="card-body">
                 <h5 className="card-title">{props.nombre}</h5>
