@@ -1,20 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
 
-function LoginPage(){
+function ForgotPage(){
     const navigate = useNavigate();
     
-
-    function logear(e){
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        if (email == "juan@gmail.com" && password == "juan123") {
-            navigate("/series");
-        } else {
-            alert("Credenciales incorrectas. Por favor, verifica tu correo electrónico y contraseña.");
-        }
+        navigate("/series");
     }
 
     return (
@@ -24,8 +16,9 @@ function LoginPage(){
                     <div className="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
                         <div className="card shadow-lg">
                             <div className="card-body p-5">
-                                <h1 className="fs-4 card-title fw-bold mb-4">Login</h1>
-                                <form autoComplete="off">
+                                <h1 className="fs-4 card-title fw-bold mb-4 text-center">¿Olvidaste tu contraseña?</h1>
+                                <p className="mb-4 text-center">No te preocupes, ingresa tu correo electrónico y coloca tu nueva contraseña para reestablecerla</p>
+                                <form onSubmit={handleSubmit} autoComplete="off">
                                     <div className="mb-3">
                                         <label className="mb-2 text-muted" htmlFor="email">E-Mail</label>
                                         <input id="email" type="email" className="form-control" name="email" required autoFocus />
@@ -44,7 +37,7 @@ function LoginPage(){
                                             <input type="checkbox" name="remember" id="remember" className="form-check-input" />
                                             <label htmlFor="remember" className="form-check-label">Recordarme</label>
                                         </div>
-                                        <button onClick={logear} className="btn btn-primary ms-auto">
+                                        <button type="submit" className="btn btn-primary ms-auto">
                                             Ingresar
                                         </button>
                                     </div>
@@ -61,5 +54,4 @@ function LoginPage(){
     );
 }
 
-
-export default LoginPage;
+export default ForgotPage;
