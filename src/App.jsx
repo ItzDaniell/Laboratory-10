@@ -7,7 +7,7 @@ import CategoryPage from "./pages/CategoryPage";
 import SeriePage  from "./pages/SeriePage";
 import ForgotPage from "./pages/ForgotPage";
 import SerieFormPage from "./pages/SerieFormPage";
-
+import EditCategoryPage from './pages/EditCategoryPage';
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
         <Route path="/categories" element={<CategoryPage />} />
         <Route path="/series" element={<SeriePage />} />
         <Route path="/formSerie" element={<SerieFormPage />} />
+        <Route path="/editar-categoria/:id" element={<EditCategoryPage />} />
       </Routes>
     </BrowserRouter>
   );
