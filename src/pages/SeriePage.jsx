@@ -17,8 +17,7 @@ function SeriePage(){
         {cod:5, nom:"Dr. House", cat:"Drama", img:imagen5},
         {cod:6, nom:"The X-Files", cat:"Drama", img:imagen6},
       ];
-
-
+      
       return (
         <>
             <HeaderComponent />
@@ -26,7 +25,7 @@ function SeriePage(){
                 <div className="d-flex justify-content-between border-bottom pb-3 mb-3">
                     <h3>Series</h3>
                     <div>
-                        <a className="btn btn-primary" href="#">Nuevo</a>
+                        <a className="btn btn-primary" href="/formSerie">Nuevo</a>
                     </div>
                 </div>
                 <div className="row">
