@@ -13,9 +13,6 @@ function HomePage(){
                         <h4>Bienvenido a la aplicación de Series</h4>
                         <p>Explora y disfruta de una amplia variedad de series y películas.</p>
                     </div>
-                    <div className="col-12 col-md-6 text-center">
-                        <img src="" alt="Placeholder" className="img-fluid" />
-                    </div>
                 </div>
             </div>
         </>

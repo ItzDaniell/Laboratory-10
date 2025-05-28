@@ -21,7 +21,7 @@ function HeaderComponent() {
                         </li>
                     </ul>
                     <div>
-                        Bienvenido Jhon Due 
+                        Bienvenido Juan Daniel 
                         <div className="text-end">
                             <a href="/">Salir</a>
                         </div> 

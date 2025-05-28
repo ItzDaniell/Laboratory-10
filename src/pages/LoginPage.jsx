@@ -11,7 +11,7 @@ function LoginPage(){
         const password = document.getElementById("password").value;
 
         if (email == "juan@gmail.com" && password == "juan123") {
-            navigate("/series");
+            navigate("/home");
         } else {
             alert("Credenciales incorrectas. Por favor, verifica tu correo electrónico y contraseña.");
         }
