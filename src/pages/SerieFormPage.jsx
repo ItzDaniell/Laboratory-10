@@ -13,15 +13,15 @@ function SerieFormPage() {
     const {id} = useParams();
     const [data, setData] = useState(initData);
 
-useEffect(() => {
-    const timer = setTimeout(() => {
-        if (data.name !== "") {
-            console.log("Nombre actualizado:", data.name);
-        }
-    }, 500); 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (data.name !== "") {
+                console.log("Nombre actualizado:", data.name);
+            }
+        }, 500); 
 
-    return () => clearTimeout(timer);
-}, [data.name]);
+        return () => clearTimeout(timer);
+    }, [data.name]);
 
     useEffect(() => {
         if (data.category !== "") {
@@ -39,6 +39,7 @@ useEffect(() => {
         e.preventDefault();
         console.log("Formulario enviado", data);
     };
+
     return (
         <>
         <HeaderComponent />
@@ -81,7 +82,7 @@ useEffect(() => {
 
             <div className="mb-3 d-flex gap-3">
                 <button type="submit" className="btn btn-primary">Guardar</button>
-                <button type="reset" className="btn btn-secondary">Cancelar</button>
+                <a href="/series" className="btn btn-danger">Volver</a>
             </div>
         </form>
         </>

@@ -18,7 +18,6 @@ function SeriePage(){
         {cod:6, nom:"The X-Files", cat:"Drama", img:imagen6},
       ];
       
-
       return (
         <>
             <HeaderComponent />

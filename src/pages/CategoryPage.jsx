@@ -3,7 +3,7 @@ import HeaderComponent from "../components/HeaderComponent";
 function CategoryPage(){
     const categories = [
         {cod:1, nom:"Horror"},
-        {cod:2, nom:"comedy"},
+        {cod:2, nom:"Comedy"},
         {cod:3, nom:"Action"},
         {cod:4, nom:"Drama"},
       ];
