@@ -14,6 +14,8 @@ import imagen3 from "./assets/images/bigbang.avif";
 import imagen4 from "./assets/images/strangerthings.jpeg";
 import imagen5 from "./assets/images/drhouse.jpeg";
 import imagen6 from "./assets/images/thexfile.jpg";
+import SerieForm from "./pages/SerieFormPage";
+
 
 function App() {
   const [series, setSeries] = useState([
@@ -33,6 +35,7 @@ function App() {
         <Route path="/categories" element={<CategoryPage />} />
         <Route path="/series" element={<SeriePage series={series}/>} />
         <Route path="/formSerie" element={<SerieFormPage setSeries={setSeries} series={series} />} />
+        <Route path="/series/:id" element={<SerieForm />} />
         <Route path="/editar-categoria/:id" element={<EditCategoryPage />} />
       </Routes>
     </BrowserRouter>

@@ -15,26 +15,28 @@ function SerieFormPage({ series, setSeries }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            if (data.name !== "") {
-                console.log("Nombre actualizado:", data.name);
-            }
-        }, 500); 
-
-        return () => clearTimeout(timer);
-    }, [data.name]);
-
-    useEffect(() => {
-        if (data.category !== "") {
-            console.log("Categoría actualizada:", data.category);
+        if (id) {
+            console.log(`Cargando datos para la serie con ID: ${id}`);
+            setTimeout(() => {
+                const serieExistente = {
+                    id: id,
+                    name: `Nombre de la Serie ${id} (Simulado)`,
+                    category: "Simulado",
+                    image: `ruta/simulada_${id}.jpg`,
+                };
+                setData(serieExistente);
+                console.log("Datos cargados:", serieExistente);
+            }, 300);
         }
-    }, [data.category]);
+    }, [id]);
 
-    useEffect(() => {
-        if (data.image !== "") {
-            console.log("Imagen seleccionada:", data.image?.name);
-        }
-    }, [data.image]);
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setData(prevData => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
