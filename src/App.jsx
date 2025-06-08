@@ -4,10 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
+import CategoryFormPage from "./pages/CategoryFormPage";
 import SeriePage  from "./pages/SeriePage";
 import ForgotPage from "./pages/ForgotPage";
 import SerieFormPage from "./pages/SerieFormPage";
 import EditCategoryPage from './pages/EditCategoryPage';
+import CategoryEditFormPage from "./pages/CategoryEditFormPage";
 import imagen1 from "./assets/images/friends.jpg";
 import imagen2 from "./assets/images/law-and-order.jpeg";
 import imagen3 from "./assets/images/bigbang.avif";
@@ -33,6 +35,8 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/forgot" element={<ForgotPage />} />
         <Route path="/categories" element={<CategoryPage />} />
+        <Route path='/categories/new' element={<CategoryFormPage />} />
+        <Route path='/categories/edit/:id' element={<CategoryEditFormPage />} />
         <Route path="/series" element={<SeriePage series={series}/>} />
         <Route path="/formSerie" element={<SerieFormPage setSeries={setSeries} series={series} />} />
         <Route path="/series/:id" element={<SerieForm />} />
