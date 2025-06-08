@@ -1,13 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function SerieComponent(props) {
-    const navigate = useNavigate();
-    const { codigo } = props;
-
-    const handleEditarClick = () => {
-        navigate(`/series/${codigo}`);
-    };
 
     return (
         <div className="card">
@@ -20,13 +14,13 @@ function SerieComponent(props) {
                 <h5 className="card-title">{props.nombre}</h5>
                 <p className="card-text">{props.categoria}</p>
                 <div className="d-flex justify-content-between">
-                    <button
-                        className="btn btn-secondary"
-                        onClick={handleEditarClick}
+                    <Link
+                    className="btn btn-secondary"
+                    to={`/formSerie/${props.codigo}`}
                     >
-                        Editar
-                    </button>
-                    <button className="btn btn-danger">Eliminar</button>
+                    Editar
+                    </Link>
+                    <button onClick={() => props.handleDelete(props.codigo)} className="btn btn-danger">Eliminar</button>
                 </div>
             </div>
         </div>

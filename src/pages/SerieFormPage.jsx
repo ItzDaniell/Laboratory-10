@@ -1,104 +1,160 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import axios from "axios";
 import HeaderComponent from "../components/HeaderComponent";
-import { Link } from "react-router-dom";
 
 const initData = {
-    id: "",
-    name: "",
-    category: "",
-    image: "",
-}
+  name: "",
+  release_date: "",
+  rating: 0,
+  image: "",
+  category: "",
+};
 
-function SerieFormPage({ series, setSeries }) {
-    const [data, setData] = useState(initData);
-    const navigate = useNavigate();
+function SerieFormPage() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState(initData);
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if (id) {
-            console.log(`Cargando datos para la serie con ID: ${id}`);
-            setTimeout(() => {
-                const serieExistente = {
-                    id: id,
-                    name: `Nombre de la Serie ${id} (Simulado)`,
-                    category: "Simulado",
-                    image: `ruta/simulada_${id}.jpg`,
-                };
-                setData(serieExistente);
-                console.log("Datos cargados:", serieExistente);
-            }, 300);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/series/api/v1/categories/");
+        setCategories(res.data.results || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+
+  useEffect(() => {
+    if (id) {
+      const fetchSerie = async () => {
+        try {
+          const res = await axios.get(`http://localhost:8000/series/api/v1/series/${id}/`);
+          setData({
+            name: res.data.name,
+            release_date: res.data.release_date,
+            rating: res.data.rating,
+            image: res.data.image || "",
+            category: res.data.category.split("/").slice(-2, -1)[0],
+          });
+        } catch (err) {
+          console.error(err);
         }
-    }, [id]);
+      };
+      fetchSerie();
+    }
+  }, [id]);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const nuevaSerie = {
-            cod: series.length + 1,
-            nom: data.name,
-            cat: data.category,
-            img: "https://dummyimage.com/400x250/000/fff",
-        };
-        setSeries([...series, nuevaSerie]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        ...data,
+        category: `http://localhost:8000/series/api/v1/categories/${data.category}/`, // enviar URL completa
+      };
 
-        navigate("/series");
-    };
+      if (id) {
+        await axios.put(`http://localhost:8000/series/api/v1/series/${id}/`, payload);
+      } else {
+        await axios.post("http://localhost:8000/series/api/v1/series/", payload);
+      }
+      navigate("/series");
+    } catch (err) {
+      console.error(err);
+      setError("Error al guardar la serie");
+    }
+  };
 
-    return (
-        <>
-        <HeaderComponent />
-        <form onSubmit={handleSubmit} className="container mt-3">
-            <h1>Agregar Serie</h1>
-            <div className="mb-3">
-                <label htmlFor="inputName" className="form-label">Nombre</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="inputName"
-                    required
-                    value={data.name}
-                    onChange={(e) => setData({ ...data, name: e.target.value })}
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="inputCategory" className="form-label">Categoría</label>
-                <select
-                    id="selectCategory"
-                    className="form-select"
-                    value={data.category}
-                    onChange={(e) => setData({ ...data, category: e.target.value })}
-                >
-                    <option value="">[[ Seleccione una opción ]]</option>
-                    <option value="Horror">Horror</option>
-                    <option value="Comedy">Comedy</option>
-                    <option value="Action">Action</option>
-                    <option value="Drama">Drama</option>
-                </select>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="inputImage" className="form-label">Imagen</label>
-                <input
-                    type="file"
-                    className="form-control"
-                    id="inputImage"
-                    onChange={(e) => setData({ ...data, image: e.target.files[0] })}
-                />
-            </div>
-
-            <div className="mb-3 d-flex gap-3">
-                <button type="submit" className="btn btn-primary">Guardar</button>
-                <Link className="btn btn-danger" to="/series">Volver</Link>
-            </div>
+  return (
+    <>
+      <HeaderComponent />
+      <div className="container mt-3">
+        <h3>{id ? "Editar" : "Nueva"} Serie</h3>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              value={data.name}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Fecha de lanzamiento</label>
+            <input
+              type="date"
+              name="release_date"
+              value={data.release_date}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Rating</label>
+            <input
+              type="number"
+              name="rating"
+              value={data.rating}
+              min={0}
+              max={10}
+              onChange={handleChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Imagen (URL)</label>
+            <input
+              type="text"
+              name="image"
+              value={data.image}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Categoría</label>
+            <select
+              name="category"
+              value={data.category}
+              onChange={handleChange}
+              className="form-select"
+              required
+            >
+              <option value="">Selecciona una categoría</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.description}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button className="btn btn-primary me-2" type="submit">
+            Guardar
+          </button>
+          <Link className="btn btn-secondary" to="/series">
+            Cancelar
+          </Link>
         </form>
-        </>
-    );
+      </div>
+    </>
+  );
 }
 
 export default SerieFormPage;
