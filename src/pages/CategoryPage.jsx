@@ -9,7 +9,7 @@ function CategoryPage() {
   const handleDelete = (id) => {
     const confirmDelete = window.confirm("¿Seguro que quieres eliminar esa categoría?");
     if (confirmDelete) {
-      const newList = categories.filter((cat) => cat.cod !== id);
+      const newList = categories.filter((item) => item.id !== id);
       setCategories(newList);
     }
   };
@@ -24,8 +24,8 @@ function CategoryPage() {
 
   const loadData = async () => {
     const resp = await axios.get(urlAPI);
-    console.log(resp.data)
-    setCategories(resp.data)
+    console.log(resp.data.results)
+    setCategories(resp.data.results)
   };
 
   useEffect(() =>{
