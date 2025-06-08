@@ -41,6 +41,15 @@ function SeriePage() {
     fetchData();
   }, []);
 
+
+  const handleDelete = async (id) => {
+    if (window.confirm('¿Está seguro de eliminar este registro?')) {
+      await axios.delete(`${seriesAPI}${id}/`);
+      const nLista = series.filter(item => item.id !== id);
+      setSeries(nLista);
+    }
+  };
+
   return (
     <>
       <HeaderComponent />
@@ -61,6 +70,7 @@ function SeriePage() {
                 nombre={serie.name}
                 categoria={serie.category_name}
                 imagen={serie.image}
+                handleDelete={handleDelete}
               />
             </div>
           ))}
