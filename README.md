@@ -1,12 +1,39 @@
-# React + Vite
+# Series Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Nuestra app de series usando **React 19**, **Vite** y **Django RestAPI**. Este proyecto incluye:
 
-Currently, two official plugins are available:
+- Componentes reutilizables
+- Manejo de estado con hooks
+- Interacción como agregar, editar y eliminar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías Usadas
+- **React-Router-Dom**: Librería de Enrutamiento
+- **axios**: Librería de fetching de datos
 
-## Expanding the ESLint configuration
+## 🚀 Instalación
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clona el repositorio:
+
+```bash
+git clone 
+cd 
+```
+
+2. Instala las dependencias
+```bash
+npm install
+```
+
+3. Ejecuta la aplicación
+```bash
+npm run dev
+```
+
+## 📌 Rutas de la Aplicación
+
+- `/` — Página de inicio.
+- `/series` — Página donde se listan las series.
+- `/categories` — Página donde se listan las categorias.
+
+## ¿Deseas usar el API?
+- Dirigete a https://github.com/Andersonbaltazar/lab08, clona el repositorio y sigue los pasos del README.md
