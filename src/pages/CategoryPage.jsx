@@ -4,13 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function CategoryPage() {
-  const [categories, setCategories] = useState([
-    { cod: 1, nom: "Horror" },
-    { cod: 2, nom: "Comedy" },
-    { cod: 3, nom: "Action" },
-    { cod: 4, nom: "Drama" },
-  ]);
-
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
@@ -24,6 +17,20 @@ function CategoryPage() {
   const handleEdit = (id) => {
     navigate(`/editar-categoria/${id}`);
   };
+
+  const urlAPI = 'http://127.0.0.1:8000/series/api/v1/categories/'
+
+  const [categories, setCategories] = useState([]);
+
+  const loadData = async () => {
+    const resp = await axios.get(urlAPI);
+    console.log(resp.data)
+    setCategories(resp.data)
+  };
+
+  useEffect(() =>{
+    loadData();
+  }, [])
 
   return (
     <>
@@ -42,19 +49,19 @@ function CategoryPage() {
           </thead>
           <tbody>
             {categories.map((item) => (
-              <tr key={item.cod}>
-                <td>{item.nom}</td>
-                <td className="text-center">{item.cod}</td>
+              <tr key={item.id}>
+                <td>{item.description}</td>
+                <td className="text-center">{item.id}</td>
                 <td className="text-center">
                   <button
                     className="btn btn-secondary me-2 btn-sm"
-                    onClick={() => handleEdit(item.cod)}
+                    onClick={() => handleEdit(item.id)}
                   >
                     <i className="bi bi-pencil-square"></i>
                   </button>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(item.cod)}
+                    onClick={() => handleDelete(item.id)}
                   >
                     <i className="bi bi-trash-fill"></i>
                   </button>
