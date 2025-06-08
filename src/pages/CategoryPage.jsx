@@ -1,5 +1,6 @@
 import HeaderComponent from "../components/HeaderComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function CategoryPage() {
@@ -16,7 +17,7 @@ function CategoryPage() {
     const confirmDelete = window.confirm("¿Seguro que quieres eliminar esa categoría?");
     if (confirmDelete) {
       const newList = categories.filter((cat) => cat.cod !== id);
-      setCategories(newList); // Actualiza la lista quitando la categoría
+      setCategories(newList);
     }
   };
 

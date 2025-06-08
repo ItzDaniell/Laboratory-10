@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import HeaderComponent from "../components/HeaderComponent";
+import { Link } from "react-router-dom";
 
 const initData = {
     id: "",
@@ -9,9 +10,9 @@ const initData = {
     image: "",
 }
 
-function SerieFormPage() {
-    const {id} = useParams();
+function SerieFormPage({ series, setSeries }) {
     const [data, setData] = useState(initData);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -35,15 +36,24 @@ function SerieFormPage() {
         }
     }, [data.image]);
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Formulario enviado", data);
+        const nuevaSerie = {
+            cod: series.length + 1,
+            nom: data.name,
+            cat: data.category,
+            img: "https://dummyimage.com/400x250/000/fff",
+        };
+        setSeries([...series, nuevaSerie]);
+
+        navigate("/series");
     };
 
     return (
         <>
         <HeaderComponent />
         <form onSubmit={handleSubmit} className="container mt-3">
+            <h1>Agregar Serie</h1>
             <div className="mb-3">
                 <label htmlFor="inputName" className="form-label">Nombre</label>
                 <input
@@ -82,7 +92,7 @@ function SerieFormPage() {
 
             <div className="mb-3 d-flex gap-3">
                 <button type="submit" className="btn btn-primary">Guardar</button>
-                <a href="/series" className="btn btn-danger">Volver</a>
+                <Link className="btn btn-danger" to="/series">Volver</Link>
             </div>
         </form>
         </>
