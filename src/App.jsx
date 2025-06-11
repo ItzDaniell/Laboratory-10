@@ -17,7 +17,7 @@ import imagen4 from "./assets/images/strangerthings.jpeg";
 import imagen5 from "./assets/images/drhouse.jpeg";
 import imagen6 from "./assets/images/thexfile.jpg";
 import SerieForm from "./pages/SerieFormPage";
-
+import SerieEditFormPage from './pages/serie/SerieEditFormPage';
 
 function App() {
   const [series, setSeries] = useState([
@@ -41,6 +41,7 @@ function App() {
         <Route path="/formSerie" element={<SerieFormPage setSeries={setSeries} series={series} />} />
         <Route path="/series/:id" element={<SerieForm />} />
         <Route path="/editar-categoria/:id" element={<EditCategoryPage />} />
+        <Route path="/serie/edit/:id" element={<SerieEditFormPage />} />
       </Routes>
     </BrowserRouter>
   );
