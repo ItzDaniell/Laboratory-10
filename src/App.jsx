@@ -11,6 +11,7 @@ import SerieFormPage from "./pages/SerieFormPage";
 import EditCategoryPage from './pages/EditCategoryPage';
 import CategoryEditFormPage from "./pages/CategoryEditFormPage";
 import SerieForm from "./pages/SerieFormPage";
+import SerieEditFormPage from './pages/serie/SerieEditFormPage';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/series" element={<SeriePage />} />
         <Route path="/formSerie" element={<SerieForm />} />
         <Route path="/formSerie/:id" element={<SerieForm />} />
-
+        <Route path="/series/edit/:id" element={<SerieEditFormPage />} />
       </Routes>
     </BrowserRouter>
   );
