@@ -11,7 +11,6 @@ const handleDelete = async (id) => {
         const confirmDelete = window.confirm("¿Seguro que quieres eliminar esa categoría?");
         if (confirmDelete) {
             try {
-              
                 await axios.delete(`${urlAPI}${id}/`); 
                 console.log(`Categoría con ID ${id} eliminada en el backend.`);
 
@@ -44,7 +43,6 @@ const handleDelete = async (id) => {
   }, [])
 
   return (
-    
     <>
       <HeaderComponent />
       <div className="container mt-3">
