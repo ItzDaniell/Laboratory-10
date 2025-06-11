@@ -1,3 +1,5 @@
+import { use, useEffect, useState } from "react";
+import { getAllSerieService } from "./services/serieServices";
 import HeaderComponent from "../components/HeaderComponent";
 import SerieComponent from "../components/SerieComponent";
 import { Link } from "react-router-dom";
@@ -50,6 +52,16 @@ function SeriePage() {
     }
   };
 
+  const loadData = async () => {
+      const resp = await getAllserieService();
+      setSeries(resp.data.results);
+  
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <>
       <HeaderComponent />
@@ -68,8 +80,8 @@ function SeriePage() {
               <SerieComponent
                 codigo={serie.id}
                 nombre={serie.name}
-                categoria={serie.category_name}
-                imagen={serie.image}
+                categoria={serie.category_description}
+                imagen={"serie.png"}
                 handleDelete={handleDelete}
               />
             </div>
