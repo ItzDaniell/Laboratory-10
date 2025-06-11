@@ -11,7 +11,6 @@ import SerieFormPage from "./pages/SerieFormPage";
 import EditCategoryPage from './pages/EditCategoryPage';
 import CategoryEditFormPage from "./pages/CategoryEditFormPage";
 import SerieForm from "./pages/SerieFormPage";
-import SerieEditFormPage from './pages/serie/SerieEditFormPage';
 
 function App() {
   return (
