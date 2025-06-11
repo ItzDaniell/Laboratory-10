@@ -82,7 +82,8 @@ function SeriePage() {
                 nombre={serie.name}
                 categoria={serie.category_description}
                 imagen={"serie.png"}
-                handleDelete={handleDelete}
+                lista={series}
+                actualizarLista={setSeries}
               />
             </div>
           ))}
