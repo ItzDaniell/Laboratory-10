@@ -20,14 +20,6 @@ function SeriePage() {
   }, []);
 
 
-  const handleDelete = async (id) => {
-    if (window.confirm('¿Está seguro de eliminar este registro?')) {
-      await axios.delete(`${seriesAPI}${id}/`);
-      const nLista = series.filter(item => item.id !== id);
-      setSeries(nLista);
-    }
-  };
-
   return (
     <>
       <HeaderComponent />
