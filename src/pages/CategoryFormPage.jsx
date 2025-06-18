@@ -3,12 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import HeaderComponent from "../components/HeaderComponent";
 
-
 const initData = {
     id: '',
     description: '',
 }
-
 
 function CategoryFormPage(){
     

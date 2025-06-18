@@ -5,40 +5,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const seriesAPI = "http://127.0.0.1:8000/series/api/v1/series/";
-const categoriesAPI = "http://127.0.0.1:8000/series/api/v1/categories/";
 
 function SeriePage() {
   const [series, setSeries] = useState([]);
-  const [categories, setCategories] = useState([]);
+
+  const loadData = async () => {
+    const resp = await axios.get(seriesAPI);
+    console.log(resp.data.results);
+    setSeries(resp.data.results);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const [seriesRes, categoriesRes] = await Promise.all([
-        axios.get(seriesAPI),
-        axios.get(categoriesAPI),
-      ]);
-
-      const categoryMap = {};
-      categoriesRes.data.results.forEach((cat) => {
-        categoryMap[cat.id] = cat.description;
-      });
-
-      const seriesWithCategory = seriesRes.data.results.map((serie) => {
-        const categoryUrlParts = serie.category.split("/");
-        const categoryId = parseInt(
-          categoryUrlParts[categoryUrlParts.length - 2]
-        );
-        return {
-          ...serie,
-          category_name: categoryMap[categoryId] || "Desconocido",
-        };
-      });
-
-      setCategories(categoriesRes.data.results);
-      setSeries(seriesWithCategory);
-    };
-
-    fetchData();
+    loadData();
   }, []);
 
 
@@ -57,7 +35,7 @@ function SeriePage() {
         <div className="d-flex justify-content-between border-bottom pb-3 mb-3">
           <h3>Series</h3>
           <div>
-            <Link className="btn btn-primary" to="/formSerie">
+            <Link className="btn btn-primary" to="/series/new">
               Nuevo
             </Link>
           </div>
@@ -68,9 +46,10 @@ function SeriePage() {
               <SerieComponent
                 codigo={serie.id}
                 nombre={serie.name}
-                categoria={serie.category_name}
+                categoria={serie.category_description}
                 imagen={serie.image}
-                handleDelete={handleDelete}
+                lista={series}
+                actualizarLista={setSeries}
               />
             </div>
           ))}

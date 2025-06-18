@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
@@ -7,10 +6,10 @@ import CategoryPage from "./pages/CategoryPage";
 import CategoryFormPage from "./pages/CategoryFormPage";
 import SeriePage  from "./pages/SeriePage";
 import ForgotPage from "./pages/ForgotPage";
-import SerieFormPage from "./pages/SerieFormPage";
-import EditCategoryPage from './pages/EditCategoryPage';
 import CategoryEditFormPage from "./pages/CategoryEditFormPage";
-import SerieForm from "./pages/SerieFormPage";
+import SerieFormPage from "./pages/SerieFormPage";
+import SerieEditFormPage from './pages/SerieEditFormPage';
+
 
 function App() {
   return (
@@ -22,10 +21,10 @@ function App() {
         <Route path="/categories" element={<CategoryPage />} />
         <Route path='/categories/new' element={<CategoryFormPage />} />
         <Route path='/categories/edit/:id' element={<CategoryEditFormPage />} />
-        <Route path="/editar-categoria/:id" element={<EditCategoryPage />} />
+
         <Route path="/series" element={<SeriePage />} />
-        <Route path="/formSerie" element={<SerieForm />} />
-        <Route path="/formSerie/:id" element={<SerieForm />} />
+        <Route path="/series/new" element={<SerieFormPage />} />
+        <Route path="/series/edit/:id" element={<SerieEditFormPage />} />
 
       </Routes>
     </BrowserRouter>

@@ -1,46 +1,49 @@
 import HeaderComponent from "../components/HeaderComponent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function CategoryPage() {
   const navigate = useNavigate();
 
-const handleDelete = async (id) => { 
-        const confirmDelete = window.confirm("¿Seguro que quieres eliminar esa categoría?");
-        if (confirmDelete) {
-            try {
-                await axios.delete(`${urlAPI}${id}/`); 
-                console.log(`Categoría con ID ${id} eliminada en el backend.`);
+  const urlAPI = "http://127.0.0.1:8000/series/api/v1/categories/";
 
-                const newList = categories.filter((item) => item.id !== id);
-                setCategories(newList);
-                alert("Categoría eliminada exitosamente."); 
-            } catch (error) {
-                console.error("Error al eliminar la categoría:", error);
-                alert("Hubo un error al eliminar la categoría. Por favor, intente de nuevo."); 
-            }
-        }
-    };
-
-  const handleEdit = (id) => {
-    navigate(`/editar-categoria/${id}`);
-  };
-
-  const urlAPI = 'http://127.0.0.1:8000/series/api/v1/categories/'
-  
   const [categories, setCategories] = useState([]);
 
   const loadData = async () => {
     const resp = await axios.get(urlAPI);
-    console.log(resp.data.results)
-    setCategories(resp.data.results)
+    console.log(resp.data.results);
+    setCategories(resp.data.results);
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     loadData();
-  }, [])
+  }, []);
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "¿Seguro que quieres eliminar esa categoría?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(`${urlAPI}${id}/`);
+        console.log(`Categoría con ID ${id} eliminada en el backend.`);
+
+        const newList = categories.filter((item) => item.id !== id);
+        setCategories(newList);
+        alert("Categoría eliminada exitosamente.");
+      } catch (error) {
+        console.error("Error al eliminar la categoría:", error);
+        alert(
+          "Hubo un error al eliminar la categoría. Por favor, intente de nuevo."
+        );
+      }
+    }
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/categories/edit/${id}`);
+  };
 
   return (
     <>
@@ -48,16 +51,20 @@ const handleDelete = async (id) => {
       <div className="container mt-3">
         <div className="border-bottom pb-3 mb-3">
           <h3>Categorías</h3>
-            <div>
-                <Link className="btn btn-primary" to="/categories/new">Nuevo</Link>
-            </div>
+          <div>
+            <Link className="btn btn-primary" to="/categories/new">
+              Nuevo
+            </Link>
+          </div>
         </div>
         <table className="table">
           <thead>
             <tr>
               <th>Nombre</th>
               <th className="text-center">Id</th>
-              <th className="text-center" style={{ width: "100px" }}>Acciones</th>
+              <th className="text-center" style={{ width: "100px" }}>
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -83,7 +90,9 @@ const handleDelete = async (id) => {
             ))}
             {categories.length === 0 && (
               <tr>
-                <td colSpan="3" className="text-center">No hay categorías.</td>
+                <td colSpan="3" className="text-center">
+                  No hay categorías.
+                </td>
               </tr>
             )}
           </tbody>
@@ -91,7 +100,6 @@ const handleDelete = async (id) => {
       </div>
     </>
   );
-  
 }
 
 export default CategoryPage;
