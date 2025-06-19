@@ -7,7 +7,7 @@ function HeaderComponent() {
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <span className="navbar-brand mb-0 h1">SeriesApp</span>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarText">
@@ -33,7 +33,7 @@ function HeaderComponent() {
                 </div>
             </div>
         </nav>
-    )
+    );
 }
-  
-export default HeaderComponent
+
+export default HeaderComponent;
