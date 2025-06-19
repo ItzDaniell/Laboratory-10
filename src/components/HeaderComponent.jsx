@@ -1,5 +1,7 @@
-function HeaderComponent() {
+import useAuthStore from "../store/authStore";
 
+function HeaderComponent() {
+    const user = useAuthStore((state) => state.user);
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,12 +22,14 @@ function HeaderComponent() {
                             <a className="nav-link" href="/series">Series</a>
                         </li>
                     </ul>
-                    <div>
-                        Bienvenido Juan Daniel 
-                        <div className="text-end">
-                            <a href="/">Salir</a>
-                        </div> 
+                    {user ? (
+                    <div className="d-flex flex-column align-items-end">
+                        <strong>{user.username}</strong>
+                        <a href="/" className="text-danger">Salir</a>
                     </div>
+                    ) : (
+                        <a href="/" className="btn btn-outline-primary">Iniciar sesión</a>
+                    )}
                 </div>
             </div>
         </nav>
